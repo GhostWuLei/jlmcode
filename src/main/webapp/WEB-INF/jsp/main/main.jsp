@@ -86,6 +86,44 @@
                 <div id="sy_layout" class="easyui-layout" fit="true">
                     <!-- 左侧-->
                     <div region="west" split="true"  title="导航菜单" style="width:230px; padding: 1px;">
+                        <div id="nav" class="easyui-accordion " fit="true" >
+                            <div title="快捷菜单" iconCls="ui-icon-computer" tools="#left_kjmenu_tools" >
+                                <ul class="ul-menu" style="margin-left: 2px;margin-right: 2px;margin-top: 2px">
+                                    <%--<c:forEach  var="m"  items="${requestScope.mymenus }" >
+                                        <li>
+                                            <c:choose>
+                                            <c:when test="${empty m.url }">
+                                            <a style="color: black;">
+                                                </c:when>
+                                                <c:otherwise>
+                                                <a  href="${m.url }" target="${m.target }" external="${m.external }" fresh="false" rel="my_${m.rel }" title="<c:out value="${m.name }"/>">
+                                                    </c:otherwise>
+                                                    </c:choose>
+                                                    &nbsp;&nbsp;<img src="${m.icon }" />&nbsp;&nbsp;<c:out value="${m.name }"/></a>
+                                        </li>
+                                    </c:forEach>--%>
+                                    <li>
+                                        <a style="color: black;">XXXXXXXXXXXX<img src=""></a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <%--<%@ include file="/WEB-INF/jsp/main/left.jsp"%>--%>
+                    </div>
+                    <!-- 中间-->
+                    <div  region="center" style="overflow: hidden;border-top: none" >
+                        <div  class="maintabs"  fit="true" border="false" >
+                            <%--<div  id="tab-mainPage" title="首页"  href="main/home.do"	tools="#tab-mainPage_tools"></div>--%>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div   title="<img src='resource/images/menu/1_close.png'/> 首页"  >
+
+                <div id="sy_layout" class="easyui-layout" fit="true">
+                    <!-- 左侧-->
+                    <div region="west" split="true"  title="导航菜单1" style="width:230px; padding: 1px;">
                         <%@ include file="/WEB-INF/jsp/main/left.jsp"%>
                     </div>
                     <!-- 中间-->
@@ -115,6 +153,7 @@
 
     <script type="text/javascript">
         //获取一些基本信息
+        <%--
         var msgWarnTime=<%=request.getAttribute("msgWarnTime") %>;
         loginUserId='<%=(String)request.getAttribute("userId") %>';
         loginName='<%=(String)request.getAttribute("trueName") %>';
@@ -127,7 +166,158 @@
                 MUI.openDialog('系统已锁定','sy_login/lock.do?rel=jm_look','jm_look',{width:500,height:200,collapsible:false,minimizable:false,maximizable:false,closable:false,modal:true,resizable:false,draggable:false});
             }
         });
+        --%>
+
+        var data = [
+            {
+                "id": 1,
+                "parentId": 0,
+                "url": "javascript:void(0)",
+                "text": "系统设置",
+                "checked": false,
+                "state": "open",
+                "children": [
+                    {
+                        "id": 2,
+                        "parentId": 1,
+                        "url": "sys/menu/index",
+                        "text": "菜单管理",
+                        "checked": false,
+                        "state": null,
+                        "children": []
+                    },
+                    {
+                        "id": 3,
+                        "parentId": 1,
+                        "url": "sys/role/index",
+                        "text": "角色管理",
+                        "checked": false,
+                        "state": null,
+                        "children": []
+                    },
+                    {
+                        "id": 4,
+                        "parentId": 1,
+                        "url": "sys/user/index",
+                        "text": "用户管理",
+                        "checked": false,
+                        "state": null,
+                        "children": []
+                    }
+                ]
+            },
+            {
+                "id": 8,
+                "parentId": 0,
+                "url": "javascript:void(0)",
+                "text": "基础设置",
+                "checked": false,
+                "state": "open",
+                "children": []
+            }
+        ];
+
+
+        $(function() {
+            var basePath = $('#basePath').val();
+
+            // 初始化
+            $('#menuAccordion').accordion({
+                fillSpace: true,
+                fit: true,
+                border: false,
+                animate: false
+            });
+
+            //初始化左侧导航栏
+            init(data);
+
+          /*  $.post(basePath + 'sys/menu/tree', {type: 1}, function(data) {
+                if(data) {
+                    $.each(data, function(index, item) {
+                        var selected = false;
+                        if (index == 0) {
+                            selected = true;
+                        }
+                        // Accordion 折叠面板
+                        $('#menuAccordion').accordion('add', {
+                            title: item.text,
+                            content: "<ul id='menu_tree_" + item.id + "'></ul>",
+                            selected: selected
+                        });
+                        // 树形菜单
+                        $('#menu_tree_' + item.id).tree({
+                            data: item.children,
+                            onClick: function(node) {
+                                if (node.children.length != 0) {
+                                    return;
+                                }
+                                // 添加选项卡
+                                addTab('tabs', node.text, node.url);
+                            }
+                        });
+                    });
+                }
+            }, 'json');*/
+
+
+
+        });
+
+
+        function init(data) {
+            $.each(data, function(index, item) {
+                var selected = false;
+                if (index == 0) {
+                    selected = true;
+                }
+                // Accordion 折叠面板
+                $('#menuAccordion').accordion('add', {
+                    title: item.text,
+                    content: "<ul id='menu_tree_" + item.id + "'></ul>",
+                    selected: selected
+                });
+                // 树形菜单
+                $('#menu_tree_' + item.id).tree({
+                    data: item.children,
+                    onClick: function(node) {
+                        if (node.children.length != 0) {
+                            return;
+                        }
+                        // 添加选项卡
+                        addTab('tabs', node.text, node.url);
+                    }
+                });
+            });
+        }
+
+        /**
+         * 添加标签页面板
+         * @param tabsId 标签页 ID
+         * @param title 标签页面板的标题文字
+         * @param url 加载远程内容来填充标签页面板的 URL
+         */
+        function addTab(tabsId, title, url) {
+
+            var $tabs = $('#' + tabsId);
+            console.log(tabsId);
+            console.log(title);
+            console.log(url);
+            console.log($tabs);
+            console.log($tabs.tabs('close', title));
+            alert($tabs.tabs('exists', title));
+            if($tabs.tabs('exists', title)) {
+                $tabs.tabs('close', title);
+            }
+            $tabs.tabs('add', {
+                title: title,
+                href: url,
+                closable: true
+            })
+        }
+
     </script>
+
     <%@ include file="/WEB-INF/jsp/main/commons-menu.jsp"%>
 
 </div>
