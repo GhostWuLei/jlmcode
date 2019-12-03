@@ -1,5 +1,6 @@
 package com.oa.manager.system.action;
 
+import com.oa.commons.base.BaseAction;
 import com.oa.manager.system.service.IDeptService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -14,7 +15,7 @@ import org.springframework.web.servlet.ModelAndView;
  */
 @Controller
 @RequestMapping("/dept")
-public class DeptAction {
+public class DeptAction extends BaseAction {
 
     @Autowired
     private IDeptService service;
@@ -25,17 +26,19 @@ public class DeptAction {
      */
     @RequestMapping("load")
     public String load(){
-        return "system/organize/dept/load";
+        return "system/organize/dept/load2";
     }
 
 
     /**
-     *
+     * 左侧部门树
      * @return
      */
     @RequestMapping("load/all")
     public ModelAndView allDept(){
-        return null;
+        return ajaxJsonEscape(service.selectAllDeptsMap());
     }
+
+
 
 }

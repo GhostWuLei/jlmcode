@@ -38,7 +38,7 @@
 					<li>
 
 						<%--<a href="javascript:alert('部门管理');">部门管理</a>--%>
-						<a href="dept/load.do?rel=stgl_jg_bmgl" target="navTab" title="部门管理">部门管理</a>
+						<a href="dept/load.do?rel=stgl_jg_bmgl&name=WuLei" target="navTab" title="部门管理">部门管理</a>
 					</li>
 					<li>
 						<a href="javascript:alert('用户管理');">用户管理</a>
