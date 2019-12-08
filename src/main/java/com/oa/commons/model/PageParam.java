@@ -36,9 +36,9 @@ public class PageParam implements java.io.Serializable{
 	/**
 	 * 条件查询规则： json格式
 	 * groups:
-	 *		rules: field,op,value,type
-	 *		groups:
-	 *		op:
+	 * rules: field,op,value,type
+	 * groups:
+	 * op:
 	 */
 	private String searchRules;
 	

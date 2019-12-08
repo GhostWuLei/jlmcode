@@ -53,7 +53,7 @@ function refreshDatagrid(event,treeId, treeNodeJSON){
 	//点击打开
 	if(treeNodeJSON.clickOpen){
 		var zTree = $.fn.zTree.getZTreeObj(treeId);
-		zTree.expandNode(treeNodeJSON);
+		zTree.expandNode(treeNodeJSON);//展开或折叠指定的节点
 	}
 	if(!treeNodeJSON.datagrid)return ;
 	var $dg=$("#"+treeNodeJSON.datagrid);

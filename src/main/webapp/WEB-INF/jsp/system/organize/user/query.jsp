@@ -1,4 +1,5 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
+<%@ page import="org.apache.xmlbeans.impl.tool.Extension" %>
 <%@ include file="/WEB-INF/jsp/commons/include.inc.jsp" %>
 <%--
 	模块：系统管理--用户管理--查询
@@ -155,7 +156,6 @@
                     width : 150,
                     sortable : true,
                     formatter: function(value,row,index){
-
                         return new Date(value).format("yyyy-MM-dd HH:mm:ss");
                     }
                 }
@@ -166,6 +166,8 @@
                 MUI.openDialog('修改用户信息','user/updatePage.do?id='+rowData.id+'&rel=<%=request.getParameter("rel")%>','<%=request.getParameter("rel")%>_update',{width:800,height:400});
             }
         });
+        <%-- &deptId={#${param.rel}_deptId}
+        alert($('#<%=request.getParameter("rel")%>_deptId').val());--%>
 
     });
 </script>

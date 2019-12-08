@@ -1,6 +1,9 @@
 package com.oa.manager.system.service;
 
 import com.oa.commons.base.IBaseService;
+import com.oa.commons.model.DataGrid;
+import com.oa.commons.model.PageParam;
+import com.oa.manager.system.bean.SyUsers;
 
 import java.util.Collection;
 import java.util.Map;
@@ -17,4 +20,12 @@ public interface IUserService extends IBaseService{
      * @return
      */
     Map<String,Collection<String>> selectRolesPowers(String userId);
+
+    /**
+     * 条件分页查询用户 用户展示界面
+     * @param param
+     * @param user
+     * @return
+     */
+    DataGrid selectUsers(PageParam param, SyUsers user);
 }
