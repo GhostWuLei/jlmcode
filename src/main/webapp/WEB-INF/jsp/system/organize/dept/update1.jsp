@@ -11,6 +11,6 @@
     <title>Title</title>
 </head>
 <body>
-<h1>欢迎${param.name }来到load2.jsp页面${param.rel }</h1>
+<h1>欢迎update.jsp页面${param.rel }</h1>
 </body>
 </html>

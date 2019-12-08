@@ -133,11 +133,6 @@
 		<aop:advisor advice-ref="txAdvice" pointcut-ref="serviceMethods"/> 
 	</aop:config>
 	
-<!--	<aop:config>
-		<aop:pointcut id="serviceMethods4" expression="execution(* com.oa.android..service.impl.*.*(..))"/> 
-		<aop:advisor advice-ref="txAdvice" pointcut-ref="serviceMethods4"/> 
-	</aop:config>-->
-	
 	<aop:config>
 		<aop:pointcut id="serviceMethods2" expression="execution(* com.oa.commons.base.BaseServiceImpl.*(..))"/>
 		<aop:advisor advice-ref="txAdvice" pointcut-ref="serviceMethods2"/> 

@@ -47,14 +47,12 @@
             <th>电话：</th>
             <td>
                 <input type="text" name="deptPhone" maxlength="255" />
-
             </td>
         </tr>
         <tr>
             <th>传真：</th>
             <td>
                 <input  type="text" name="deptFax"  maxlength="255"  class="easyui-validatebox" />
-
             </td>
         </tr>
         <tr>
@@ -88,7 +86,6 @@
                             <input  type="text" value="<my:outDeptName id="${param.superId }" />"  readonly="readonly"  toName="dept.deptName"  class="easyui-validatebox" required="true"/>
                         </c:otherwise>
                     </c:choose>
-
                 </a>
                 <input type="hidden" name="superId"  toName="dept.id"  value="<c:out value="${param.superId }" default="0"/>" />
                 <a class="easyui-linkbutton clearLookup"  icon="icon-cancel"	plain="true"  href="javascript:;"  clearLookup="dept"  title="清空"></a>
