@@ -59,41 +59,8 @@
     });
 
     function updateUserDeptId(event,treeId, treeNodeJSON){
-        alert("XXXXX");
         $('#<%= request.getParameter("rel") %>_deptId').val(treeNodeJSON.id);
         refreshDatagrid(event,treeId, treeNodeJSON);
     }
-
-    <%--
-
-
-    function refreshDatagrid(event,treeId, treeNodeJSON){
-	//点击打开
-	if(treeNodeJSON.clickOpen){
-		var zTree = $.fn.zTree.getZTreeObj(treeId);
-		zTree.expandNode(treeNodeJSON);//展开或折叠指定的节点
-	}
-	if(!treeNodeJSON.datagrid)return ;
-	var $dg=$("#"+treeNodeJSON.datagrid);
-	var $form=$dg.closest(".datagrid").find($dg.attr("toolbar")+">form");
-	var o = {};
-	$.each($form.serializeArray(), function(index) {
-		if (o[this['name']]) {
-			o[this['name']] = o[this['name']] + "," + this['value'];
-		} else {
-			o[this['name']] = this['value'];
-		}
-	});
-	var queryParams = $dg.datagrid('options').queryParams;//获取原查询条件
-	$.extend(queryParams,o,treeNodeJSON.param);//将现在的查询条件合并到原条件中
-	$dg.datagrid('load', queryParams);
-	if(treeNodeJSON.updateTitle){//修改表格title
-		$dg.datagrid('getPanel').panel("setTitle",treeNodeJSON.updateTitle);
-	}
-}
-
-
-
-    --%>
 
 </script>

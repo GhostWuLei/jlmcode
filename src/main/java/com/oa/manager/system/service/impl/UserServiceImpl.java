@@ -2,8 +2,13 @@ package com.oa.manager.system.service.impl;
 
 import com.oa.commons.base.BaseServiceImpl;
 import com.oa.commons.cache.MyCache;
+import com.oa.commons.config.MsgConfig;
 import com.oa.commons.model.DataGrid;
+import com.oa.commons.model.Member;
 import com.oa.commons.model.PageParam;
+import com.oa.commons.util.DateUtil;
+import com.oa.commons.util.MD5Util;
+import com.oa.commons.util.ServletUtil;
 import com.oa.manager.system.bean.SyUsers;
 import com.oa.manager.system.service.IUserService;
 import org.apache.commons.lang.StringUtils;
@@ -75,6 +80,37 @@ public class UserServiceImpl extends BaseServiceImpl implements IUserService{
 
         return data;
     }
+
+    /**
+     * 添加用户
+     * @param user
+     * @return
+     */
+    @Override
+    public String addUser(SyUsers user) {
+        //判断是否有重名
+        Object obj = dao.findOne("from SyUsers where userName=?", user.getUserName());
+        if(obj==null){
+            Member me = ServletUtil.getMember();
+            user.setRegisterUid(me.getId());
+            user.setUserPassword(MD5Util.MD5(user.getUserPassword()));
+            user.setErrorCount((short) 0);
+            user.setLastLoginIp("x.x.x.x");//设置用户最后登录ip，可以根据此ip判断用户是否为第一次登录系统
+            user.setRegisterTime(DateUtil.currentTimestamp());
+            dao.save(user);
+            if(StringUtils.isNotBlank(user.getId())){
+                saveLog("添加用户","账号"+user.getUserName());
+                ServletUtil.getSession().removeAttribute("jmpw");//清除加密密码
+                return MsgConfig.MSG_KEY_SUCCESS;
+            }else{
+                return MsgConfig.MSG_KEY_FAIL;
+            }
+        }else{
+            return "msg.username.unique";//用户名已被占用
+        }
+    }
+
+
 
 
 }

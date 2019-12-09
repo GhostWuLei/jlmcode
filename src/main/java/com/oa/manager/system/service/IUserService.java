@@ -28,4 +28,11 @@ public interface IUserService extends IBaseService{
      * @return
      */
     DataGrid selectUsers(PageParam param, SyUsers user);
+
+    /**
+     * 添加用户
+     * @param user
+     * @return
+     */
+    String addUser(SyUsers user);
 }
