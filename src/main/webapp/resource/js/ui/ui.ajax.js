@@ -605,7 +605,6 @@ $.fn.extend({
 		});
 	},
 	selectedTodo:function(){
-		
 		return this.each(function(){
 			var $this = $(this);
 			$this.click(function(event){

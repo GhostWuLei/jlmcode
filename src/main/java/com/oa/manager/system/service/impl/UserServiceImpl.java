@@ -110,6 +110,40 @@ public class UserServiceImpl extends BaseServiceImpl implements IUserService{
         }
     }
 
+    /**
+     * 修改用户
+     * @param user
+     * @return
+     */
+    @Override
+    public String updateUser(SyUsers user) {
+        SyUsers old = dao.get(SyUsers.class,user.getId());
+        if(old==null){
+            return MsgConfig.MSG_KEY_NODATA;
+        }
+        Object obj = dao.findOne("from SyUsers where userName=? and id!=? ", user.getUserName(), user.getId());
+        if(obj!=null){
+            return "msg.username.unique";// 用户名已被占用
+        }
+        if(StringUtils.isNotBlank(user.getUserPassword())){
+            old.setUserPassword(MD5Util.MD5(user.getUserPassword()));
+        }
+        old.setUserName(user.getUserName());
+        old.setTrueName(user.getTrueName());
+        old.setUserSex(user.getUserSex());
+        old.setMobilePhoneNumber(user.getMobilePhoneNumber());
+        old.setDeptId(user.getDeptId());
+        old.setUserDesc(user.getUserDesc());
+        old.setUserStatus(user.getUserStatus());
+        //dao.update(old);
+        saveLog("修改用户"," 账号"+old.getUserName());
+        //删除缓存
+        MyCache.getInstance().removeCache(MyCache.USERID2INFO,old.getId());
+        return MsgConfig.MSG_KEY_SUCCESS;
+    }
+
+
+
 
 
 

@@ -163,6 +163,7 @@
 
             ] ],
             onDblClickRow:function(rowIndex, rowData){
+                console.log(rowData);
                 MUI.openDialog('修改用户信息','user/updatePage.do?id='+rowData.id+'&rel=<%=request.getParameter("rel")%>','<%=request.getParameter("rel")%>_update',{width:800,height:400});
             }
         });

@@ -52,7 +52,6 @@ function changeEasyUITheme(themeName){
  * @param {} _box
  */
 function initUI(_box){
-	
 	var $p = $(_box || document);
 	
 	if ($.fn.initMainTab) $(".maintabs", $p).initMainTab();

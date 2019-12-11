@@ -35,4 +35,12 @@ public interface IUserService extends IBaseService{
      * @return
      */
     String addUser(SyUsers user);
+
+    /**
+     * 修改用户
+     * @param user
+     * @return
+     */
+    String updateUser(SyUsers user);
+
 }

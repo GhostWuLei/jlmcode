@@ -95,8 +95,52 @@ public class UserAction extends BaseAction{
         return ajaxDone(optRes);
     }
 
+    /**
+     * 跳转到修改用户信息界面
+     * @param id
+     * @param map
+     * @return
+     */
+    @RequestMapping("updatePage")
+    public String updatePage(String id,ModelMap map){
+        SyUsers user = service.get(SyUsers.class,id);
+        if(user==null){
+            return NODATA;
+        }
+        user.setUserPassword("");
+        map.addAttribute("u",user);
+        return "system/organize/user/update";
+
+    }
+
+    /**
+     * 修改用户
+     * @param user
+     * @param errors
+     * @return
+     */
+    @RequestMapping("update")
+    public ModelAndView update(@Valid SyUsers user,Errors errors){
+        if(errors.hasErrors()){
+            ModelAndView mav = getValidationMessage(errors,"userPassword");
+            if(mav!=null){
+                return mav;
+            }
+        }
+        String optRes = service.updateUser(user);
+        return ajaxDone(optRes);
+    }
 
 
+    @RequestMapping("updateMyPwPage")
+    public String updateMyPwPage(ModelMap map){
+        String pwd = UUID.randomUUID().toString();
+        ServletUtil.getSession().setAttribute("jmpw",pwd);
+        RSAPublicKeyModel publicKey = RSAUtils.getPublicKeyModel(pwd);
+        map.put("modulus",publicKey.getHexModulus());
+        map.put("exponent",publicKey.getHexPublicExponent());
+        return "system/organize/user/update_password";
+    }
 
 
 

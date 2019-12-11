@@ -17,32 +17,24 @@
 <link id="easyuiTheme" href="resource/js/easyui/themes/<c:out value="${cookie.easyuiThemeName.value}" default="default"/>/easyui.css"  rel="stylesheet" type="text/css" media="screen" />
 <script type="text/javascript" src="resource/js/easyui-1.3.5/jquery.easyui.min.js"></script>
 <script type="text/javascript" src="resource/js/easyui-1.3.5/locale/easyui-lang-zh_CN.js"></script>
-
-
 <%-- easyui portal插件 --%>
 <link rel="stylesheet" href="resource/js/easyui-portal/portal.css" type="text/css"/>
 <script type="text/javascript" src="resource/js/easyui-portal/jquery.portal.js"></script>
 
-
 <!-- js 对象拓展  -->
 <script src="resource/js/jsObject.Expand.js" type="text/javascript"></script>
 
-<%-- zTree --%>
+<%-- jQuery zTree --%>
 <link rel="stylesheet" href="resource/js/zTree/zTreeStyle/zTreeStyle.css" type="text/css"/>		
 <script src="resource/js/zTree/jquery.ztree.all-3.5.min.js" type="text/javascript"></script>
-
 
 <%-- 上传input 浏览选择按钮美化 --%>
 <script src="resource/js/jquery.filestyle.js" type="text/javascript"></script>
 
-
 <%-- 百度编辑器 --%>
-
 <script type="text/javascript" src="resource/js/ueditor/ueditor.config.js" charset="utf-8"></script>
 <script type="text/javascript" src="resource/js/ueditor/ueditor.all.min.js" charset="utf-8"></script>
 <link rel="stylesheet" type="text/css" href="resource/js/ueditor/themes/default/css/ueditor.css"/>
-
-
 
 <%-- ckeditor编辑器 --%>
 <%--<script type="text/javascript" src="resource/js/ckeditor/ckeditor.js" charset="utf-8"></script>
