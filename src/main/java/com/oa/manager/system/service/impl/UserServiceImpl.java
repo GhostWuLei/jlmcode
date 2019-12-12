@@ -2,6 +2,7 @@ package com.oa.manager.system.service.impl;
 
 import com.oa.commons.base.BaseServiceImpl;
 import com.oa.commons.cache.MyCache;
+import com.oa.commons.config.BaseConfig;
 import com.oa.commons.config.MsgConfig;
 import com.oa.commons.model.DataGrid;
 import com.oa.commons.model.Member;
@@ -140,6 +141,61 @@ public class UserServiceImpl extends BaseServiceImpl implements IUserService{
         //删除缓存
         MyCache.getInstance().removeCache(MyCache.USERID2INFO,old.getId());
         return MsgConfig.MSG_KEY_SUCCESS;
+    }
+
+    /**
+     * 修改密码
+     * @param oldPassword
+     * @param userPassword
+     * @return
+     */
+    @Override
+    public boolean updateMyPassword(String oldPassword, String userPassword) {
+        //验证旧密码是否正确
+        SyUsers user = dao.get(SyUsers.class, ServletUtil.getMember().getId());
+        if(MD5Util.MD5Validate(oldPassword,user.getUserPassword())){
+            //修改密码
+            user.setUserPassword(MD5Util.MD5(userPassword));
+            saveLog("修改密码","");
+            return true;
+        }else{
+            return false;
+        }
+    }
+
+    /**
+     * 批量删除用户
+     *
+     * @param ids
+     * @return
+     */
+    @Override
+    public boolean deleteUsers(String[] ids) {
+        //等待删除的对象集合
+        List<Object> list = new ArrayList<Object>();
+        for (String id : ids) {
+            SyUsers user = dao.get(SyUsers.class, id);
+            if(user!=null){
+                if(!user.getUserName().equals(BaseConfig.getInstance().getSaName())&&!user.getUserName().equals(BaseConfig.getInstance().getDevName())){
+                    saveLog("删除用户","账号："+user.getUserName());
+                    list.add(user);
+                    //删除缓存
+                    MyCache.getInstance().removeCache(MyCache.USERID2INFO,id);
+                }
+            }
+        }
+        return dao.deleteAll(list);
+    }
+
+    /**
+     * 重置用户密码
+     * @param id
+     * @param userPassword
+     * @return
+     */
+    @Override
+    public boolean updatePassword(String id, String userPassword) {
+        return dao.update("update SyUsers set userPassword = ? where id = ? ",MD5Util.MD5(userPassword),id);
     }
 
 

@@ -154,9 +154,8 @@ function myRadio(input){
  * @param {} $form form jquery对象
  */
 function encryptePassword($form){
-	
-	var key = RSAUtils.getKeyPair($("#exponent",$form).val(), '', $("#modulus",$form).val());  
-	
+
+	var key = RSAUtils.getKeyPair($("#exponent",$form).val(), '', $("#modulus",$form).val());
 	$("[encryptTo]",$form).each(function(){
 		var enName=$(this).attr("encryptTo");
 		var password = RSAUtils.encryptedString(key, encodeURIComponent($(this).val())); 

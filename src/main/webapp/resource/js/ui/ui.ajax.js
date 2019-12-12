@@ -142,7 +142,6 @@ function validateSubmitForm(form){
 		Msg.alert("提示","表单填写不完整!",'warning');
 		return false;
 	}
-	
 	if($form.attr("beforeCallback")){
 		var $beforeCallback=eval('(' + $form.attr("beforeCallback") + ')');
 		if(!$beforeCallback($form))return false;

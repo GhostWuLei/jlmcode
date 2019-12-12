@@ -43,4 +43,26 @@ public interface IUserService extends IBaseService{
      */
     String updateUser(SyUsers user);
 
+    /**
+     * 修改密码
+     * @param oldPassword
+     * @param userPassword
+     * @return
+     */
+    boolean updateMyPassword(String oldPassword, String userPassword);
+
+    /**
+     * 批量删除用户
+     * @param ids
+     * @return
+     */
+    boolean deleteUsers(String[] ids);
+
+    /**
+     * 重置用户密码
+     * @param id
+     * @param userPassword
+     * @return
+     */
+    boolean updatePassword(String id, String userPassword);
 }
