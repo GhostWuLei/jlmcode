@@ -36,15 +36,13 @@
 				<a href="javascript:void(0);">组织机构</a>
 				<ul class="ul-submenu">
 					<li>
-
-						<%--<a href="javascript:alert('部门管理');">部门管理</a>--%>
 						<a href="dept/load.do?rel=stgl_jg_bmgl" target="navTab" title="部门管理">部门管理</a>
 					</li>
 					<li>
 						<a href="user/load.do?rel=stgl_jg_yhgl" target="navTab" title="用户管理">用户管理</a>
 					</li>
 					<li>
-						<a href="javascript:alert('角色管理');">角色管理</a>
+						<a href="role/load.do?rel=stgl_jg_jsgl" target="navTab" title="角色管理">角色管理</a>
 					</li>
 				</ul>
 			</li>

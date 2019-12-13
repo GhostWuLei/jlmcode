@@ -1,6 +1,8 @@
 package com.oa.manager.system.service;
 
 import com.oa.commons.base.IBaseService;
+import com.oa.commons.model.DataGrid;
+import com.oa.commons.model.PageParam;
 import com.oa.manager.system.bean.SyDept;
 
 import java.util.List;
@@ -38,4 +40,12 @@ public interface IDeptService extends IBaseService{
      * @return
      */
     String deleteDept(String id);
+
+    /**
+     * 查询部门 返回到选择部门界面
+     * @param pageParam
+     * @param dept
+     * @return
+     */
+    DataGrid selectDepts(PageParam pageParam, SyDept dept);
 }

@@ -1,6 +1,7 @@
 package com.oa.manager.system.action;
 
 import com.oa.commons.base.BaseAction;
+import com.oa.commons.model.PageParam;
 import com.oa.manager.system.bean.SyDept;
 import com.oa.manager.system.service.IDeptService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -93,6 +94,7 @@ public class DeptAction extends BaseAction {
      * @param errors
      * @return
      */
+    @RequestMapping("add")
     public ModelAndView add(@Valid SyDept dept,Errors errors){
         //添加信息验证有误
         if(errors.hasErrors()){
@@ -110,14 +112,31 @@ public class DeptAction extends BaseAction {
      * @param id
      * @return
      */
+    @RequestMapping("del")
     public ModelAndView delete(String id){
         String optRes = service.deleteDept(id);
-        return null;
+        return ajaxDone(optRes);
     }
 
+    /**
+     * 跳转到选择部门界面
+     * @return
+     */
+    @RequestMapping("lookUpPage")
+    public String lookUpPage(){
+        return "system/organize/dept/lookup";
+    }
 
-
-
+    /**
+     * 查询部门 返回到选择部门界面
+     * @param pageParam
+     * @param dept
+     * @return
+     */
+    @RequestMapping("lookUp")
+    public ModelAndView lookUp(PageParam pageParam,SyDept dept){
+        return ajaxJsonEscape(service.selectDepts(pageParam,dept));
+    }
 
 
 

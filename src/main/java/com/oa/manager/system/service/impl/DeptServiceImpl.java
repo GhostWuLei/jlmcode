@@ -3,11 +3,14 @@ package com.oa.manager.system.service.impl;
 import com.oa.commons.base.BaseServiceImpl;
 import com.oa.commons.cache.MyCache;
 import com.oa.commons.config.MsgConfig;
+import com.oa.commons.model.DataGrid;
+import com.oa.commons.model.PageParam;
 import com.oa.manager.system.bean.SyDept;
 import com.oa.manager.system.service.IDeptService;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -83,8 +86,53 @@ public class DeptServiceImpl extends BaseServiceImpl implements IDeptService{
      */
     @Override
     public String deleteDept(String id) {
+        Object obj = dao.findOne("from SyDept where superId = ?", id);
+        if(obj!=null){
+            return "msg.dept.haschild";//部门下属还有子部门，无法删除
+        }else{
+            Object one = dao.findOne("from SyUsers where deptId = ?", id);
+            if(one!=null){
+                return "msg.dept.hasuser";//有用户属于此部门，无法删除
+            }
+            SyDept dept = dao.get(SyDept.class, id);
+            if(dept!=null){
+                if(dao.delete(dept)){
+                    saveLog("删除部门","部门名称："+dept.getDeptName());
+                    //删除缓存
+                    MyCache.getInstance().removeCache(MyCache.DEPTID2NAME,id);
+                    return MsgConfig.MSG_KEY_SUCCESS;
+                }else{
+                    return MsgConfig.MSG_KEY_FAIL;
+                }
+            }else{
+                return MsgConfig.MSG_KEY_NODATA;
+            }
+        }
+    }
 
-        return null;
+    /**
+     * 查询部门 返回到选择部门界面
+     * @param pageParam
+     * @param dept
+     * @return
+     */
+    @Override
+    @SuppressWarnings({ "rawtypes", "unchecked" })
+    public DataGrid selectDepts(PageParam pageParam, SyDept dept) {
+        DataGrid data = new DataGrid();
+        StringBuffer sb = new StringBuffer("from SyDept d where 1=1 ");
+        List list = new ArrayList();
+        if(StringUtils.isNotBlank(dept.getDeptName())){
+            sb.append(" and d.deptName like ?");
+            list.add("%"+dept.getDeptName()+"%");
+        }
+        Long total = (Long) dao.findUniqueOne("select count(*) "+sb.toString(),list);
+        //排序
+        pageParam.appendOrderBy(sb);
+        List<SyDept> rows = dao.findPage(sb.toString(), pageParam.getPage(), pageParam.getRows(), list);
+        data.setTotal(total);
+        data.setRows(rows);
+        return data;
     }
 
 

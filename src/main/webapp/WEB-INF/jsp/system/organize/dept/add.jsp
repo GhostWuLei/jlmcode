@@ -77,7 +77,6 @@
             <th>上级部门：</th>
             <td>
                 <a href="dept/lookUpPage.do?type=3" lookupGroup="dept"  title="上级部门查询">
-
                     <c:choose>
                         <c:when test="${empty param.superId }">
                             <input  type="text" value="顶级部门"  readonly="readonly"  toName="dept.deptName"  class="easyui-validatebox" required="true"/>

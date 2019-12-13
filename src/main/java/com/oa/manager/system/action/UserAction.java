@@ -40,7 +40,7 @@ public class UserAction extends BaseAction{
     private IDeptService deptService;//部门
 
     /**
-     * 跳转到用户加载页面
+     * 跳转到用户列表页面
      * @return
      */
     @RequestMapping("load")
@@ -249,6 +249,23 @@ public class UserAction extends BaseAction{
     @RequestMapping("lookUpPage")
     public String lookUpPage(){
         return "system/organize/user/lookup";
+    }
+
+    /**
+     * 查找用户并返回
+     * @param pageParam
+     * @param user
+     * @param type
+     * @return
+     */
+    @RequestMapping("lookUp")
+    public ModelAndView lookUp(PageParam pageParam,SyUsers user,int type){
+        user.setUserStatus((short) 1);
+        if(type!=3){
+            return ajaxJsonEscape(service.selectUsersLookUp(pageParam,user));
+        }else{
+            return ajaxJsonEscape(service.selectUsersLookUpNumber(pageParam, user));
+        }
     }
 
 

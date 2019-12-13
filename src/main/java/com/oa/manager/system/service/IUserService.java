@@ -65,4 +65,20 @@ public interface IUserService extends IBaseService{
      * @return
      */
     boolean updatePassword(String id, String userPassword);
+
+    /**
+     * 条件分页查询用户 返回到选择用户界面
+     * @param pageParam
+     * @param user
+     * @return
+     */
+    DataGrid selectUsersLookUp(PageParam pageParam, SyUsers user);
+
+    /**
+     * 条件分页查询用户(带number) 返回到选择用户界面
+     * @param pageParam
+     * @param user
+     * @return
+     */
+    DataGrid selectUsersLookUpNumber(PageParam pageParam, SyUsers user);
 }
