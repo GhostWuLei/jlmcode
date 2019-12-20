@@ -61,7 +61,7 @@
 				</ul>
 			</li>
 			<li><a href="list/load.do?rel=xtgl_zdgl" target="navTab" title="字典管理">字典管理</a></li>
-			<li><a href="javascript:alert('菜单管理');">菜单管理</a></li>
+			<li><a href="menu/load.do?rel=xtgl_cdgl" target="navTab" title="菜单管理">菜单管理</a></li>
 			<li><a href="javascript:alert('用户导入');">用户导入</a></li>
 			<li><a href="javascript:alert('地区管理');">地区管理</a></li>
 			<li><a href="javascript:alert('打印导出自定义管理');">打印导出自定义管理</a></li>

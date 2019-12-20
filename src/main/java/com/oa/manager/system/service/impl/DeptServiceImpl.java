@@ -15,7 +15,7 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * 部门管理 业务操作
+ * 部门管理 业务层
  * Created By WL on 2019/12/2
  */
 @Service
