@@ -34,4 +34,18 @@ public interface IRoleService extends IBaseService{
      * @return
      */
     String addRole(SyRole role);
+
+    /**
+     * 修改角色
+     * @param role
+     * @return
+     */
+    String updateRole(SyRole role);
+
+    /**
+     * 批量删除角色
+     * @param ids
+     * @return
+     */
+    boolean deleteRoles(String[] ids);
 }

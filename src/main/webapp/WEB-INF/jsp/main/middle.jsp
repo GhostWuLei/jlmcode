@@ -60,7 +60,7 @@
 					</li>
 				</ul>
 			</li>
-			<li><a href="javascript:alert('字典管理');">字典管理</a></li>
+			<li><a href="list/load.do?rel=xtgl_zdgl" target="navTab" title="字典管理">字典管理</a></li>
 			<li><a href="javascript:alert('菜单管理');">菜单管理</a></li>
 			<li><a href="javascript:alert('用户导入');">用户导入</a></li>
 			<li><a href="javascript:alert('地区管理');">地区管理</a></li>

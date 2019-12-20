@@ -1,6 +1,7 @@
 package com.oa.manager.system.service.impl;
 
 import com.oa.commons.base.BaseServiceImpl;
+import com.oa.commons.cache.MyCache;
 import com.oa.commons.config.MsgConfig;
 import com.oa.commons.model.DataGrid;
 import com.oa.commons.model.PageParam;
@@ -70,9 +71,45 @@ public class RoleServiceImpl extends BaseServiceImpl implements IRoleService{
         }
     }
 
+    /**
+     * 修改角色
+     * @param role
+     * @return
+     */
+    @Override
+    public String updateRole(SyRole role) {
+        Object obj = dao.findOne("from SyRole where id != ? and roleName = ?", role.getId(), role.getRoleName());
+        if(obj==null){
+            if(dao.update(role)){
+                saveLog("修改角色","角色名称："+role.getRoleName());
+                MyCache.getInstance().removeCache(MyCache.ROLE2NAME,role.getId());
+                return MsgConfig.MSG_KEY_SUCCESS;
+            }else{
+                return MsgConfig.MSG_KEY_FAIL;
+            }
+        }else{
+            return "msg.role.unique";
+        }
+    }
 
-
-
+    /**
+     * 批量删除角色
+     * @param ids
+     * @return
+     */
+    @Override
+    public boolean deleteRoles(String[] ids) {
+        List list = new ArrayList();
+        for (String id : ids) {
+            SyRole role = dao.get(SyRole.class, id);
+            if(role!=null){
+                saveLog("删除角色","角色名称："+role.getRoleName());
+                list.add(role);
+                MyCache.getInstance().removeCache(MyCache.ROLE2NAME,id);
+            }
+        }
+        return dao.deleteAll(list);
+    }
 
 
 }
