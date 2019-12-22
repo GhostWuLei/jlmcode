@@ -36,13 +36,13 @@
 				<a href="javascript:void(0);">组织机构</a>
 				<ul class="ul-submenu">
 					<li>
-						<a href="dept/load.do?rel=stgl_jg_bmgl" target="navTab" title="部门管理">部门管理</a>
+						<a href="dept/load.do?rel=stgl_jg_bmgl" rel="stgl_jg_bmgl" target="navTab" title="部门管理">部门管理</a>
 					</li>
 					<li>
-						<a href="user/load.do?rel=stgl_jg_yhgl" target="navTab" title="用户管理">用户管理</a>
+						<a href="user/load.do?rel=stgl_jg_yhgl" rel="stgl_jg_yhgl" target="navTab" title="用户管理">用户管理</a>
 					</li>
 					<li>
-						<a href="role/load.do?rel=stgl_jg_jsgl" target="navTab" title="角色管理">角色管理</a>
+						<a href="role/load.do?rel=stgl_jg_jsgl" rel="stgl_jg_jsgl" target="navTab" title="角色管理">角色管理</a>
 					</li>
 				</ul>
 			</li>
@@ -60,10 +60,10 @@
 					</li>
 				</ul>
 			</li>
-			<li><a href="list/load.do?rel=xtgl_zdgl" target="navTab" title="字典管理">字典管理</a></li>
-			<li><a href="menu/load.do?rel=xtgl_cdgl" target="navTab" title="菜单管理">菜单管理</a></li>
+			<li><a href="list/load.do?rel=xtgl_zdgl" rel="xtgl_zdgl" target="navTab" title="字典管理">字典管理</a></li>
+			<li><a href="menu/load.do?rel=xtgl_cdgl" rel="xtgl_cdgl" target="navTab" title="菜单管理">菜单管理</a></li>
 			<li><a href="javascript:alert('用户导入');">用户导入</a></li>
-			<li><a href="district/load.do?superId=0&rel=xtgl_dqgl" target="navTab" title="地区管理">地区管理</a></li>
+			<li><a href="district/load.do?superId=0&rel=xtgl_dqgl" rel="xtgl_dqgl" target="navTab" title="地区管理">地区管理</a></li>
 			<li><a href="javascript:alert('打印导出自定义管理');">打印导出自定义管理</a></li>
 			<li><a href="javascript:alert('在线管理');">在线管理</a></li>
 			<li><a href="javascript:alert('服务器信息');">服务器信息</a></li>
